@@ -1,24 +1,22 @@
 import pygame
+from pygame import draw
 
 # define a main function
 def main():
-     
-    # initialize the pygame module
-    pygame.init()
-    # load and set the logo
-    logo = pygame.image.load("scary.png")
-    pygame.display.set_icon(logo)
-    pygame.display.set_caption("minimal program")
+    
+    pygame.display.set_caption("Blamo")
      
     # create a surface on screen that has the size of 240 x 180
     screen = pygame.display.set_mode((1900,1000))
      
     # define a variable to control the main loop
     running = True
-     
+    screen.fill((255,255,255))
+    pygame.draw.rect(screen,(0,0,128),(450,450,30,40,30))
+    pygame.display.update()
     # main loop
     while running:
-        # event handling, gets all event from the event queue
+        
         for event in pygame.event.get():
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
