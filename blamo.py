@@ -2,27 +2,47 @@ import pygame
 from pygame import draw
 
 # define a main function
+
 def main():
-    
+    speed = 2
+    x= 30
+    y= 30
+    done = False
     pygame.display.set_caption("Blamo")
-     
-    # create a surface on screen that has the size of 240 x 180
     screen = pygame.display.set_mode((1900,1000))
-     
-    # define a variable to control the main loop
-    running = True
-    screen.fill((255,255,255))
-    pygame.draw.rect(screen,(0,0,128),(450,450,30,40,30))
-    pygame.display.update()
-    # main loop
-    while running:
-        
+    is_blue= True
+    clock = pygame.time.Clock()
+    while not done:
         for event in pygame.event.get():
-            # only do something if the event is of type QUIT
-            if event.type == pygame.QUIT:
-                # change the value to False, to exit the main loop
-                running = False
-     
+
+                if event.type == pygame.QUIT:
+                        done = True
+        
+        pygame.display.flip()
+        if is_blue: 
+            color = (0, 128, 255)
+        else: 
+            color = (255, 100, 0)
+        pygame.draw.rect(screen, color, pygame.Rect(x, y, 60, 60))
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            is_blue = not is_blue
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_v]: speed+=.25
+        if pressed[pygame.K_c]: speed-=.25
+        if pressed[pygame.K_UP]: y -= speed
+        if pressed[pygame.K_DOWN]: y += speed
+        if pressed[pygame.K_LEFT]: x -= speed
+        if pressed[pygame.K_RIGHT]: x += speed
+        
+        screen.fill((0, 0, 0))
+        if is_blue: color = (0, 128, 255)
+        else: color = (255, 100, 0)
+        pygame.draw.rect(screen, color, pygame.Rect(x, y, 60, 60))
+        
+        pygame.display.flip()
+        clock.tick(60)
+
+        
      
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
