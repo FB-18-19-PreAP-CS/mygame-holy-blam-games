@@ -9,7 +9,7 @@ def main():
     y= 30
     done = False
     pygame.display.set_caption("Blamo")
-    screen = pygame.display.set_mode((1900,1000))
+    screen = pygame.display.set_mode((900,600))
     is_blue= True
     clock = pygame.time.Clock()
     while not done:
@@ -23,28 +23,30 @@ def main():
             color = (0, 128, 255)
         else: 
             color = (255, 100, 0)
-        pygame.draw.rect(screen, color, pygame.Rect(x, y, 60, 60))
+        blu = pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             is_blue = not is_blue
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
         if pressed[pygame.K_UP]: y -= speed 
-        if pressed[pygame.K_DOWN]: y += speed
-        if pressed[pygame.K_LEFT]: x -= speed
+        if pressed[pygame.K_DOWN]:y += speed
+        if pressed[pygame.K_LEFT]: x -= speed 
+            
         if pressed[pygame.K_RIGHT]: x += speed
+
         if x > 1900:
-            x = 0
+            x = 1800
         if x < 0:
-            x = 1900
+            x = 120
         if y > 1000:
-            y= 0
+            y= 880
         if y < 0:
-            y= 1000
+            y= 120
         screen.fill((0, 0, 0))
         if is_blue: color = (0, 128, 255)
         else: color = (255, 100, 0)
-        pygame.draw.rect(screen, color, pygame.Rect(x, y, 60, 60))
+        pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
         
         pygame.display.flip()
         clock.tick(60)
