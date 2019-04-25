@@ -29,11 +29,18 @@ def main():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
-        if pressed[pygame.K_UP]: y -= speed
+        if pressed[pygame.K_UP]: y -= speed 
         if pressed[pygame.K_DOWN]: y += speed
         if pressed[pygame.K_LEFT]: x -= speed
         if pressed[pygame.K_RIGHT]: x += speed
-        
+        if x > 1900:
+            x = 0
+        if x < 0:
+            x = 1900
+        if y > 1000:
+            y= 0
+        if y < 0:
+            y= 1000
         screen.fill((0, 0, 0))
         if is_blue: color = (0, 128, 255)
         else: color = (255, 100, 0)
