@@ -1,5 +1,6 @@
 import pygame
-from pygame import draw
+
+from pygame_functions import *
 
 # define a main function
 
@@ -24,18 +25,22 @@ def main():
         #     color = (0, 128, 255)
         # else: 
         #     color = (255, 100, 0)
-        screen.blit(image,(20,20))
-        # blu = pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
+        screen.blit(image,(x,y))
+        
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-        #     is_blue = not is_blue
+        #     is_car = pygame.image.load('Audi.png')
+        
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
         if pressed[pygame.K_UP]: y -= speed 
         if pressed[pygame.K_DOWN]:y += speed
-        if pressed[pygame.K_LEFT]: x -= speed 
+        if pressed[pygame.K_LEFT]: 
+            x -= speed 
+            rotateSprite(image, 3)
             
-        if pressed[pygame.K_RIGHT]: x += speed
+        if pressed[pygame.K_RIGHT]: 
+            x += speed
 
         if x > 900:
             x = 880
