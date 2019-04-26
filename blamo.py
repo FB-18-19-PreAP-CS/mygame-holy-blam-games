@@ -12,20 +12,22 @@ def main():
     screen = pygame.display.set_mode((900,600))
     is_blue= True
     clock = pygame.time.Clock()
+    image = pygame.image.load('Black_viper.png')
     while not done:
         for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
                         done = True
         
-        pygame.display.flip()
-        if is_blue: 
-            color = (0, 128, 255)
-        else: 
-            color = (255, 100, 0)
-        blu = pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            is_blue = not is_blue
+        # pygame.display.flip()
+        # if is_blue: 
+        #     color = (0, 128, 255)
+        # else: 
+        #     color = (255, 100, 0)
+        screen.blit(image,(20,20))
+        # blu = pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
+        # if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+        #     is_blue = not is_blue
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
@@ -35,20 +37,21 @@ def main():
             
         if pressed[pygame.K_RIGHT]: x += speed
 
-        if x > 1900:
-            x = 1800
+        if x > 900:
+            x = 880
         if x < 0:
-            x = 120
-        if y > 1000:
-            y= 880
+            x = 20
+        if y > 600:
+            y= 580
         if y < 0:
-            y= 120
-        screen.fill((0, 0, 0))
-        if is_blue: color = (0, 128, 255)
-        else: color = (255, 100, 0)
-        pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
+            y= 20
+        # if is_blue: color = (0, 128, 255)
+        # else: color = (255, 100, 0)
+        # pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
         
         pygame.display.flip()
+        screen.fill((0, 0, 0))
+
         clock.tick(60)
 
         
