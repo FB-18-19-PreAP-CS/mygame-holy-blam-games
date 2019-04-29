@@ -1,19 +1,20 @@
-import pygame
+
 
 from pygame_functions import *
 
 # define a main function
 
 def main():
-    speed = 2
-    x= 30
-    y= 30
     done = False
-    pygame.display.set_caption("Blamo")
-    screen = pygame.display.set_mode((900,600))
-    is_blue= True
+    x= 20
+    y = 20
+    speed = 2
     clock = pygame.time.Clock()
-    image = pygame.image.load('Black_viper.png')
+    screenSize(1000,900)
+    setBackgroundImage('racetrack.png')
+    viper = makeSprite('Black_viper.png')
+    transformSprite(viper, 0, .25)
+    angle = 0
     while not done:
         for event in pygame.event.get():
 
@@ -25,7 +26,7 @@ def main():
         #     color = (0, 128, 255)
         # else: 
         #     color = (255, 100, 0)
-        screen.blit(image,(x,y))
+        showSprite(viper)
         
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
         #     is_car = pygame.image.load('Audi.png')
@@ -33,14 +34,19 @@ def main():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
-        if pressed[pygame.K_UP]: y -= speed 
-        if pressed[pygame.K_DOWN]:y += speed
+        if pressed[pygame.K_UP]: 
+            y -= speed 
+        if pressed[pygame.K_DOWN]:
+            y += speed
         if pressed[pygame.K_LEFT]: 
             x -= speed 
-            rotateSprite(image, 3)
+            angle += 15
+            transformSprite(viper, angle, .25)
             
         if pressed[pygame.K_RIGHT]: 
             x += speed
+            angle-=15
+            transformSprite(viper, angle, .25)
 
         if x > 900:
             x = 880
@@ -50,12 +56,11 @@ def main():
             y= 580
         if y < 0:
             y= 20
+        moveSprite(viper,x,y)
+
         # if is_blue: color = (0, 128, 255)
         # else: color = (255, 100, 0)
-        # pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10))
-        
-        pygame.display.flip()
-        screen.fill((0, 0, 0))
+        # pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10)
 
         clock.tick(60)
 
