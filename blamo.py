@@ -42,12 +42,12 @@ def main():
             x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
             x -= speed 
-            angle += -5
+            angle += -3
             transformSprite(viper, angle+90, .25)
             
         if pressed[pygame.K_RIGHT]: 
             x += speed
-            angle+= 5
+            angle+= 3
             transformSprite(viper, angle+90, .25)
 
         if x > 900:
