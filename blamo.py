@@ -1,5 +1,5 @@
 
-
+import math
 from pygame_functions import *
 
 # define a main function
@@ -13,7 +13,7 @@ def main():
     screenSize(1000,900)
     setBackgroundImage('racetrack.png')
     viper = makeSprite('Black_viper.png')
-    transformSprite(viper, 0, .25)
+    transformSprite(viper,90, .25)
     angle = 0
     while not done:
         for event in pygame.event.get():
@@ -34,19 +34,21 @@ def main():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
-        if pressed[pygame.K_UP]: 
-            y -= speed 
+        if pressed[pygame.K_UP]:
+            x +=speed* math.cos(angle*math.pi/180)
+            y += speed* math.sin(angle*math.pi/180)
         if pressed[pygame.K_DOWN]:
-            y += speed
+            y -=speed* math.sin(angle*math.pi/180)
+            x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
             x -= speed 
-            angle += 15
-            transformSprite(viper, angle, .25)
+            angle += -5
+            transformSprite(viper, angle+90, .25)
             
         if pressed[pygame.K_RIGHT]: 
             x += speed
-            angle-=15
-            transformSprite(viper, angle, .25)
+            angle+= 5
+            transformSprite(viper, angle+90, .25)
 
         if x > 900:
             x = 880
@@ -57,6 +59,7 @@ def main():
         if y < 0:
             y= 20
         moveSprite(viper,x,y)
+        angle = angle%360
 
         # if is_blue: color = (0, 128, 255)
         # else: color = (255, 100, 0)
