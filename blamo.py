@@ -10,7 +10,7 @@ def main():
     y = 20
     speed = 2
     clock = pygame.time.Clock()
-    screenSize(1000,900)
+    screenSize(1000,560)
     setBackgroundImage('racetrack.png')
     viper = makeSprite('Black_viper.png')
     transformSprite(viper, 0, .25)
