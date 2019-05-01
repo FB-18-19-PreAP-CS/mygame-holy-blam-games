@@ -13,7 +13,7 @@ def main():
     screenSize(1000,560)
     setBackgroundImage('racetrack.png')
     viper = makeSprite('Black_viper.png')
-    transformSprite(viper,90, .25)
+    transformSprite(viper,90, .1)
     angle = 0
     while not done:
         for event in pygame.event.get():
@@ -41,14 +41,11 @@ def main():
             y -=speed* math.sin(angle*math.pi/180)
             x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
-            x -= speed 
-            angle += -3
-            transformSprite(viper, angle+90, .25)
-            
+            angle += -4
+            transformSprite(viper, angle+90, .1)
         if pressed[pygame.K_RIGHT]: 
-            x += speed
-            angle+= 3
-            transformSprite(viper, angle+90, .25)
+            angle+= 4
+            transformSprite(viper, angle+90, .1)
 
         if x > 900:
             x = 880
