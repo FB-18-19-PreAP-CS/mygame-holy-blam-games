@@ -2,12 +2,12 @@ import pygame
 from pygame_functions import *
 #import Pygame_Functions-master
 pygame.init()
-map_width = 80
-map_height = 60
+map_width = 60
+map_height = 45
 cell_width = 20
 cell_height = 20
-dis_width = 1600
-dis_height = 1200
+dis_width = map_width * cell_width
+dis_height = map_height * cell_height
 black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
@@ -22,11 +22,24 @@ class Tile:
 
 
 mymap = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
+map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
+
 #mymap = [[r*30],[r*30]]
 
 #mymap[10][10].slow_down = True
+for y in range(10,36):
+    for x in range(10,51):
+        mymap[y][x].slow_down = True
 
-mymap[29][39].slow_down = True
+mymap[0][0].slow_down = True
+#top left
+mymap[44][59].slow_down = True
+#bottom right
+mymap[44][0].slow_down = True
+#bottom left
+mymap[0][59].slow_down = True
+#top right
+
 
 
 gameDisplay = pygame.display.set_mode((dis_width,dis_height))
@@ -45,7 +58,7 @@ def draw_map(m):
                 
 
 pygame.display.set_caption('McQuestionable')
-
+1
 clock = pygame.time.Clock()
 bassimg = pygame.image.load('basspro.png')
 #bassimg = makeSprite('basspro.png')
