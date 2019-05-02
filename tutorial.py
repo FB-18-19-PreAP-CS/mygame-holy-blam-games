@@ -15,7 +15,7 @@ green = (0,255,0)
 blue = (0,0,255)
 grass = pygame.image.load('grass.png')
 road = pygame.image.load('road.png')
-
+gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 class Tile:
 
     def __init__(self,slow_down):
@@ -44,7 +44,6 @@ def create_map():
 
 
 
-gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 #surface main^
 def draw_map(m):
     for x in range(map_width):
@@ -59,14 +58,12 @@ def draw_map(m):
                 gameDisplay.blit(road, (x*cell_width, y* cell_height))
                 
 
-pygame.display.set_caption('McQuestionable')
-1
-clock = pygame.time.Clock()
-bassimg = pygame.image.load('basspro.png')
+
+#bassimg = pygame.image.load('basspro.png')
 #bassimg = makeSprite('basspro.png')
 
-def bass(x,y):
-    gameDisplay.blit(bassimg,(x,y))
+#def bass(x,y):
+    #gameDisplay.blit(bassimg,(x,y))
     #showSprite(bassimg)
     #moveSprite(bassimg,x,y)
 
@@ -76,21 +73,28 @@ def bass(x,y):
 
 
 
+def main():
+    pygame.display.set_caption('McQuestionable')
 
-crashed = False
+    clock = pygame.time.Clock()
 
-while not crashed:
+    crashed = False
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            crashed = True
+    while not crashed:
 
-    pygame.display.update()
-    clock.tick(60)
-    #gameDisplay.fill(blue)
-    mymap = create_map()
-    draw_map(mymap)
-    bass(400,200)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                crashed = True
 
-pygame.quit()
-quit()
+        pygame.display.update()
+        clock.tick(60)
+        #gameDisplay.fill(blue)
+        mymap = create_map()
+        draw_map(mymap)
+        #bass(400,200)
+
+    pygame.quit()
+    quit()
+
+if __name__ == '__main__':
+    main()
