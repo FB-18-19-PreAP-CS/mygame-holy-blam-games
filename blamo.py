@@ -26,9 +26,9 @@ def cars():
                         done = True
         showSprite(viper)
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
         if pressed[pygame.K_UP]:
+            speed+=.01
             x +=speed* math.cos(angle*math.pi/180)
             y += speed* math.sin(angle*math.pi/180)
         if pressed[pygame.K_DOWN]:
@@ -52,9 +52,9 @@ def cars():
         moveSprite(viper,x,y)
         showSprite(popo)
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_e]: speed_2+=.25
         if pressed[pygame.K_r]: speed_2-=.25
         if pressed[pygame.K_w]:
+            speed_2+=.01
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
         if pressed[pygame.K_s]:
@@ -77,6 +77,20 @@ def cars():
         moveSprite(popo,o,p)
         angle_dos = angle_dos%360
         angle = angle%360
+        if touching(viper,popo):
+            x+=10
+            y+=10
+            o-=10
+            p-=10
+            speed -= 10
+            speed_2-=10
+        if speed < 0:
+            speed = 1 
+        if speed_2 < 0:
+            speed_2 = 1
+        speed = speed%20
+        speed_2 = speed_2%20
+
 
         # if is_blue: color = (0, 128, 255)
         # else: color = (255, 100, 0)
