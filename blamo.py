@@ -1,6 +1,7 @@
 
 import math
 from pygame_functions import *
+from tutorial import *
 
 
 # define a main function
@@ -24,6 +25,8 @@ def cars():
 
                 if event.type == pygame.QUIT:
                         done = True
+        my_map = create_map()
+        draw_map(my_map)
         showSprite(viper)
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_c]: speed-=.25
@@ -101,8 +104,8 @@ def cars():
     
     
 def main():
-    screenSize(1000,560)
-    setBackgroundImage('racetrack.png')
+    screenSize(1200,900)
+    # setBackgroundImage('racetrack.png')
     cars()
    
 
