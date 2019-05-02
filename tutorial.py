@@ -15,30 +15,32 @@ green = (0,255,0)
 blue = (0,0,255)
 grass = pygame.image.load('grass.png')
 road = pygame.image.load('road.png')
+
 class Tile:
 
     def __init__(self,slow_down):
         self.slow_down = slow_down
 
-
-mymap = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
-map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
+def create_map():
+    mymap = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
+    #map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
 
 #mymap = [[r*30],[r*30]]
 
 #mymap[10][10].slow_down = True
-for y in range(10,36):
-    for x in range(10,51):
-        mymap[y][x].slow_down = True
+    for y in range(10,36):
+        for x in range(10,51):
+            mymap[y][x].slow_down = True
 
-mymap[0][0].slow_down = True
-#top left
-mymap[44][59].slow_down = True
-#bottom right
-mymap[44][0].slow_down = True
-#bottom left
-mymap[0][59].slow_down = True
-#top right
+    mymap[0][0].slow_down = True
+    #top left
+    mymap[44][59].slow_down = True
+    #bottom right
+    mymap[44][0].slow_down = True
+    #bottom left
+    mymap[0][59].slow_down = True
+    #top right
+    return mymap
 
 
 
@@ -86,6 +88,7 @@ while not crashed:
     pygame.display.update()
     clock.tick(60)
     #gameDisplay.fill(blue)
+    mymap = create_map()
     draw_map(mymap)
     bass(400,200)
 
