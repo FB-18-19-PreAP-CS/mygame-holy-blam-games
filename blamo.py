@@ -2,35 +2,29 @@
 import math
 from pygame_functions import *
 
-# define a main function
 
-def main():
+# define a main function
+def cars():
     done = False
-    x= 20
-    y = 20
+    x = 20
+    y= 20
+    o = 30
+    p = 30
     speed = 2
+    speed_2 = 2
     clock = pygame.time.Clock()
-    screenSize(1000,560)
-    setBackgroundImage('racetrack.png')
     viper = makeSprite('Black_viper.png')
     transformSprite(viper,90, .1)
+    popo = makeSprite('cool_car.png')
+    transformSprite(popo,90, .1)
     angle = 0
+    angle_dos = 0
     while not done:
         for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
                         done = True
-        
-        # pygame.display.flip()
-        # if is_blue: 
-        #     color = (0, 128, 255)
-        # else: 
-        #     color = (255, 100, 0)
         showSprite(viper)
-        
-        # if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-        #     is_car = pygame.image.load('Audi.png')
-        
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_v]: speed+=.25
         if pressed[pygame.K_c]: speed-=.25
@@ -56,6 +50,32 @@ def main():
         if y < 0:
             y= 20
         moveSprite(viper,x,y)
+        showSprite(popo)
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_e]: speed_2+=.25
+        if pressed[pygame.K_r]: speed_2-=.25
+        if pressed[pygame.K_w]:
+            o +=speed_2* math.cos(angle_dos*math.pi/180)
+            p += speed_2* math.sin(angle_dos*math.pi/180)
+        if pressed[pygame.K_s]:
+            o -=speed_2* math.sin(angle_dos*math.pi/180)
+            p -=speed_2* math.cos(angle_dos*math.pi/180)
+        if pressed[pygame.K_a]: 
+            angle_dos+= -4
+            transformSprite(popo, angle_dos+90, .1)
+        if pressed[pygame.K_d]: 
+            angle_dos+= 4
+            transformSprite(popo, angle_dos+90, .1)
+        if o > 900:
+            o = 880
+        if o < 0:
+            o = 20
+        if p > 600:
+            p= 580
+        if p < 0:
+            p= 20
+        moveSprite(popo,o,p)
+        angle_dos = angle_dos%360
         angle = angle%360
 
         # if is_blue: color = (0, 128, 255)
@@ -63,6 +83,14 @@ def main():
         # pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10)
 
         clock.tick(60)
+
+    
+    
+def main():
+    screenSize(1000,560)
+    setBackgroundImage('racetrack.png')
+    cars()
+   
 
         
      
