@@ -29,7 +29,7 @@ def cars():
         draw_map(my_map)
         showSprite(viper)
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_c]: speed-=.25
+        if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
             speed+=.5
             x +=speed* math.cos(angle*math.pi/180)
@@ -38,10 +38,10 @@ def cars():
             y -=speed* math.sin(angle*math.pi/180)
             x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
-            angle += -4
+            angle += -7
             transformSprite(viper, angle+90, .1)
         if pressed[pygame.K_RIGHT]: 
-            angle+= 4
+            angle+= 7
             transformSprite(viper, angle+90, .1)
 
         if x > 1200:
@@ -68,10 +68,10 @@ def cars():
             o -=speed_2* math.sin(angle_dos*math.pi/180)
             p -=speed_2* math.cos(angle_dos*math.pi/180)
         if pressed[pygame.K_a]: 
-            angle_dos+= -4
+            angle_dos+= -7
             transformSprite(popo, angle_dos+90, .1)
         if pressed[pygame.K_d]: 
-            angle_dos+= 4
+            angle_dos+= 7
             transformSprite(popo, angle_dos+90, .1)
         if o > 1200:
             o = 1100
@@ -103,11 +103,10 @@ def cars():
             speed = 20
         if speed_2 > 20:
             speed_2 = 20
-        #print(y//20)
-        current_tile_x = int(x//20)
-        current_tile_y = int(y//20)
         if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
             speed-=1 
+        if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
+            speed_2-=1
 
 
         
@@ -123,7 +122,6 @@ def cars():
     
 def main():
     screenSize(1200,900)
-    setBackgroundImage('racetrack.png')
     cars()
    
 
