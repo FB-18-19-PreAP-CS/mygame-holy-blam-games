@@ -13,6 +13,8 @@ def cars():
     p = 30
     speed = 2
     speed_2 = 2
+    lap_count= 0
+    lap_count_2=0
     clock = pygame.time.Clock()
     viper = makeSprite('Black_viper.png')
     transformSprite(viper,90, .1)
@@ -25,7 +27,7 @@ def cars():
 
                 if event.type == pygame.QUIT:
                         done = True
-            
+        
         my_map = create_map()
         draw_map(my_map)
         showSprite(viper)
@@ -103,14 +105,18 @@ def cars():
             speed = 1 
         if speed_2 < 0:
             speed_2 = 1
-        if speed > 40:
-            speed =40
-        if speed_2 > 40:
-            speed_2 = 40
+        if speed > 20:
+            speed =20
+        if speed_2 > 20:
+            speed_2 = 20
         if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
             speed-=1 
         if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
             speed_2-=1
+        if my_map[int(y//20)][int(x//20)].finish_line and speed > 5:
+            lap_count+=1
+        if my_map[int(p//20)][int(o//20)].finish_line and speed_2 > 5:
+            lap_count_2 +=1
 
 
         
