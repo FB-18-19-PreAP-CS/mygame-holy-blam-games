@@ -25,10 +25,12 @@ def cars():
 
                 if event.type == pygame.QUIT:
                         done = True
+            
         my_map = create_map()
         draw_map(my_map)
         showSprite(viper)
         pressed = pygame.key.get_pressed()
+        
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
             speed+=.5
@@ -65,8 +67,8 @@ def cars():
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
         if pressed[pygame.K_s]:
-            o -=speed_2* math.sin(angle_dos*math.pi/180)
-            p -=speed_2* math.cos(angle_dos*math.pi/180)
+            p -=speed_2* math.sin(angle_dos*math.pi/180)
+            o -=speed_2* math.cos(angle_dos*math.pi/180)
         if pressed[pygame.K_a]: 
             angle_dos+= -7
             transformSprite(popo, angle_dos+90, .1)
@@ -95,12 +97,14 @@ def cars():
             p-=10
             speed -= 10
             speed_2-=10
+
+            # makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background='clear')
         if speed < 0:
             speed = 1 
         if speed_2 < 0:
             speed_2 = 1
-        if speed > 20:
-            speed = 20
+        if speed > 30:
+            speed = 30
         if speed_2 > 20:
             speed_2 = 20
         if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
