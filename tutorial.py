@@ -19,12 +19,13 @@ finish = pygame.image.load('finish_line.png')
 gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 class Tile:
 
-    def __init__(self,slow_down,finish_line):
+    def __init__(self,slow_down,finish_line,block_path):
         self.slow_down = slow_down
         self.finish_line = finish_line
+        self.block_path = block_path
 
 def create_map():
-    mymap = [[ Tile(False,False) for x in range(0,map_width)] for y in range(0,map_height)]
+    mymap = [[ Tile(False,False,False) for x in range(0,map_width)] for y in range(0,map_height)]
     #map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
 
 #mymap = [[r*30],[r*30]]
