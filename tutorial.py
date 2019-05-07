@@ -33,6 +33,19 @@ def create_map():
     for y in range(12,33):
         for x in range(15,46):
             mymap[y][x].slow_down = True
+    mymap[12][15].slow_down = False
+    mymap[32][45].slow_down = False
+    mymap[12][45].slow_down = False
+    for i in range(3):
+        mymap[32 - i][15].slow_down = False
+        mymap[12+i][15].slow_down = False
+        mymap[32-i][45].slow_down = False
+        mymap[12+i][45].slow_down = False
+    for i in range(3):
+        mymap[32][15+i].slow_down = False
+        mymap[12][15+i].slow_down = False
+        mymap[32][45-i].slow_down = False
+        mymap[12][45-i].slow_down = False
     for i in range(60):
         mymap[0][i].slow_down = True
         mymap[44][i].slow_down = True
@@ -42,25 +55,32 @@ def create_map():
 
     #top left
     for i in range(6):
-        mymap[44-i][59].slow_down = True
-        mymap[0][i].slow_down = True
-        mymap[i][0].slow_down = True
+        mymap[(map_height-1)-i][map_width - 2].slow_down = True
+        mymap[1][i].slow_down = True
+        mymap[(map_height-1)-i][1].slow_down = True
+        mymap[1][(map_width-1)-i].slow_down = True
         if i < 5:
-            mymap[44-i][58].slow_down = True
-            mymap[1][i].slow_down = True
-            mymap[i][1].slow_down = True
-        if i < 4:
-            mymap[44-i][57].slow_down = True
+            mymap[(map_height-1)-i][map_width - 3].slow_down = True
             mymap[2][i].slow_down = True
-            mymap[i][2].slow_down = True
-        if i < 3:
-            mymap[44-i][56].slow_down = True
+            mymap[(map_height-1)-i][2].slow_down = True
+            mymap[2][(map_width-1)-i].slow_down = True
+        if i < 4:
+            mymap[(map_height-1)-i][map_width - 4].slow_down = True
             mymap[3][i].slow_down = True
-            mymap[i][3].slow_down = True
-        if i < 2:
-            mymap[44-i][55].slow_down = True
+            mymap[(map_height-1)-i][3].slow_down = True
+            mymap[3][(map_width-1)-i].slow_down = True
+        if i < 3:
+            mymap[(map_height-1)-i][map_width - 4].slow_down = True
             mymap[4][i].slow_down = True
-            mymap[i][3].slow_down = True
+            mymap[(map_height-1)-i][4].slow_down = True
+            mymap[4][(map_width-1)-i].slow_down = True
+        if i < 2:
+            mymap[(map_height-1)-i][map_width - 5].slow_down = True
+            mymap[5][i].slow_down = True
+            mymap[(map_height-1)-i][5].slow_down = True
+            mymap[5][(map_width-1)-i].slow_down = True
+            
+
     
     
     
@@ -69,7 +89,8 @@ def create_map():
     mymap[44][0].slow_down = True
     #bottom left
     mymap[0][59].slow_down = True
-    mymap[5][30].finish_line = True
+    for i in range(1,12):
+        mymap[i][30].finish_line = True
     #top right
     return mymap
 #surface main^
