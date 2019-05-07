@@ -103,10 +103,10 @@ def cars():
             speed = 1 
         if speed_2 < 0:
             speed_2 = 1
-        if speed > 30:
-            speed = 30
-        if speed_2 > 20:
-            speed_2 = 20
+        if speed > 40:
+            speed =40
+        if speed_2 > 40:
+            speed_2 = 40
         if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
             speed-=1 
         if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
