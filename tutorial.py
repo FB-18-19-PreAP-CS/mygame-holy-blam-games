@@ -16,16 +16,17 @@ blue = (0,0,255)
 grass = pygame.image.load('red.png')
 road = pygame.image.load('road.png')
 finish = pygame.image.load('finish_line.png')
+check = pygame.image.load('blue.png')
 gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 class Tile:
 
-    def __init__(self,slow_down,finish_line,block_path):
+    def __init__(self,slow_down,finish_line,block_path,checkpoint):
         self.slow_down = slow_down
         self.finish_line = finish_line
         self.block_path = block_path
-
+        self.checkpoint = checkpoint
 def create_map():
-    mymap = [[ Tile(False,False,False) for x in range(0,map_width)] for y in range(0,map_height)]
+    mymap = [[ Tile(False,False,False,(False,0)) for x in range(0,map_width)] for y in range(0,map_height)]
     #map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
 
 #mymap = [[r*30],[r*30]]
@@ -48,6 +49,7 @@ def create_map():
         mymap[32][45-i].slow_down = False
         mymap[12][45-i].slow_down = False
     for i in range(60):
+        
         mymap[0][i].slow_down = True
         mymap[1][i].slow_down = True
         mymap[44][i].slow_down = True
@@ -104,8 +106,15 @@ def create_map():
     mymap[44][0].slow_down = True
     #bottom left
     mymap[0][59].slow_down = True
-    for i in range(2,12):
-        mymap[i][30].finish_line = True
+    for i in range(2,15):
+        if i < 12:
+            mymap[i][30].finish_line = True
+            mymap[i][31].finish_line = True
+            mymap[i][29].finish_line = True
+            mymap[i+31][30].checkpoint = (True,1)
+        mymap[22][i].checkpoint = (True,1)
+        mymap[22][i+43].checkpoint = (True,1)
+
     #top right
     return mymap
 #surface main^
@@ -122,6 +131,9 @@ def draw_map(m):
             if m[y][x].finish_line:
                 #draw finish line
                 gameDisplay.blit(finish, (x*cell_width, y* cell_height))
+            if m[y][x].checkpoint[0]:
+                gameDisplay.blit(check, (x*cell_width, y* cell_height))
+
 
                 
     
