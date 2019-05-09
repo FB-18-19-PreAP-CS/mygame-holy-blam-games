@@ -109,11 +109,9 @@ def create_map():
     for y in range(3):
         for i in range(2,15):
             if i < 12:
-                mymap[i][30+y].finish_line = True
-                mymap[i][31+y].finish_line = True
                 mymap[i][29+y].finish_line = True
-                mymap[i+31][30+y].checkpoint = (True,1)
-            mymap[22+y][i].checkpoint = (True,1)
+                mymap[i+31][29+y].checkpoint = (True,2)
+            mymap[22+y][i].checkpoint = (True,3)
             mymap[22+y][i+43].checkpoint = (True,1)
         mymap[22+y][45].checkpoint = (False,1)
 
