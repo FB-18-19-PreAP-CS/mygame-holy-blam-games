@@ -17,11 +17,13 @@ def cars():
     lap_count_2=0
     clock = pygame.time.Clock()
     viper = makeSprite('Black_viper.png')
-    transformSprite(viper,90, .1)
+    transformSprite(viper,90, .3)
     popo = makeSprite('cool_car.png')
-    transformSprite(popo,90, .1)
+    transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
+    black_laps = makeLabel(f'Black car Lap {lap_count}', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
+    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 18, 300, 100, fontColour='white', font='Gugi', background='Black')
     while not done:
         for event in pygame.event.get():
 
@@ -29,10 +31,13 @@ def cars():
                         done = True
         
         my_map = create_map()
-        draw_map(my_map)
+        setBackgroundImage( 'background.png' )
+        showLabel(black_laps)
+        showLabel(orange_laps)
+        changeLabel(black_laps, f'Black car Lap {lap_count}', fontColour='white', background='Black')
+        changeLabel(orange_laps, f'Orange car Lap {lap_count_2}', fontColour='white', background='Black')
         showSprite(viper)
         pressed = pygame.key.get_pressed()
-        
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
             speed+=.5
@@ -43,11 +48,10 @@ def cars():
             x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
             angle += -7
-            transformSprite(viper, angle+90, .1)
+            transformSprite(viper, angle+90, .3)
         if pressed[pygame.K_RIGHT]: 
             angle+= 7
-            transformSprite(viper, angle+90, .1)
-
+            transformSprite(viper, angle+90, .3)
         if x > 1200:
             x = 1100
             speed-=10
@@ -73,10 +77,10 @@ def cars():
             o -=speed_2* math.cos(angle_dos*math.pi/180)
         if pressed[pygame.K_a]: 
             angle_dos+= -7
-            transformSprite(popo, angle_dos+90, .1)
+            transformSprite(popo, angle_dos+90, .3)
         if pressed[pygame.K_d]: 
             angle_dos+= 7
-            transformSprite(popo, angle_dos+90, .1)
+            transformSprite(popo, angle_dos+90, .3)
         if o > 1200:
             o = 1100
             speed_2-=10
@@ -99,37 +103,24 @@ def cars():
             p-=10
             speed -= 10
             speed_2-=10
-
             # makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background='clear')
         if speed < 0:
             speed = 1 
         if speed_2 < 0:
             speed_2 = 1
-        if speed > 20:
-            speed =20
-        if speed_2 > 20:
-            speed_2 = 20
+        if speed > 40:
+            speed =40
+        if speed_2 > 40:
+            speed_2 = 40
         if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
             speed-=1 
         if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
             speed_2-=1
-        if my_map[int(y//20)][int(x//20)].finish_line and speed > 5:
+        if my_map[int(y//20)][int(x//20)].finish_line:
             lap_count+=1
-        if my_map[int(p//20)][int(o//20)].finish_line and speed_2 > 5:
+        if my_map[int(p//20)][int(o//20)].finish_line:
             lap_count_2 +=1
-
-
-        
-
-
-        # if is_blue: color = (0, 128, 255)
-        # else: color = (255, 100, 0)
-        # pygame.draw.rect(screen, color, pygame.Rect(x, y, 10, 10)
-
         clock.tick(60)
-
-    
-    
 def main():
     screenSize(1200,900)
     cars()
