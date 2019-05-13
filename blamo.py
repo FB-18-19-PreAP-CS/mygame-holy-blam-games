@@ -162,7 +162,7 @@ def bumper_cars():
                 if event.type == pygame.QUIT:
                         done = True
         
-        my_map = create_map()
+        my_map = create_map_tag()
         setBackgroundImage( 'background.png' )
         showLabel(tagged)
         
