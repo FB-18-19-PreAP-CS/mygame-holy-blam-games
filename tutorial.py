@@ -17,25 +17,32 @@ grass = pygame.image.load('red.png')
 road = pygame.image.load('road.png')
 finish = pygame.image.load('finish_line.png')
 check = pygame.image.load('blue.png')
+pseudo = pygame.image.load('pseudo.png')
 gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 class Tile:
 
-    def __init__(self,slow_down,finish_line,block_path,checkpoint):
+    def __init__(self,slow_down,finish_line,block_path,checkpoint,extra_slow_down,pseudo_wall):
         self.slow_down = slow_down
         self.finish_line = finish_line
         self.block_path = block_path
         self.checkpoint = checkpoint
+        self.extra_slow_down = extra_slow_down
+        self.pseudo_wall = pseudo_wall
+
 
 def create_map_tag():
-    tag_map = [[ Tile(False,False,False,(False,0)) for x in range(0,map_width)] for y in range(0,map_height)]
+    tag_map = [[ Tile(False,False,False,(False,0),False,False) for x in range(0,map_width)] for y in range(0,map_height)]
 
 
     for y in range(10,15):
         for x in range(20,25):
-            tag_map[y][x].slow_down = True
-            tag_map[y+18][x].slow_down = True
-            tag_map[y][x+23].slow_down = True
-            tag_map[y+16][x+17].slow_down = True
+            tag_map[y][x].extra_slow_down = True
+            tag_map[y+23][x].extra_slow_down = True
+            tag_map[y][x+26].extra_slow_down = True
+            tag_map[y+22][x+25].extra_slow_down = True
+            tag_map[y+12][x-14].extra_slow_down = True
+            if x < 23 and y < 13: 
+                tag_map[22+y-10][35+x-20].pseudo_wall = True
 
     return tag_map
 
@@ -152,6 +159,11 @@ def draw_map(m):
                 gameDisplay.blit(finish, (x*cell_width, y* cell_height))
             if m[y][x].checkpoint[0]:
                 gameDisplay.blit(check, (x*cell_width, y* cell_height))
+
+            if m[y][x].extra_slow_down:
+                gameDisplay.blit(grass, (x*cell_width, y* cell_height))
+            if m[y][x].pseudo_wall:
+                gameDisplay.blit(pseudo, (x*cell_width, y* cell_height))
 
 
                 
