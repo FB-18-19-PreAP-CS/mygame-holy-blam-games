@@ -48,7 +48,7 @@ def create_map_tag():
 
 
 def create_map():
-    mymap = [[ Tile(False,False,False,(False,0)) for x in range(0,map_width)] for y in range(0,map_height)]
+    mymap = [[ Tile(False,False,False,(False,0),False,False) for x in range(0,map_width)] for y in range(0,map_height)]
     #map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
 
 
