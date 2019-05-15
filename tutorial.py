@@ -17,17 +17,41 @@ grass = pygame.image.load('red.png')
 road = pygame.image.load('road.png')
 finish = pygame.image.load('finish_line.png')
 check = pygame.image.load('blue.png')
+pseudo = pygame.image.load('pseudo.png')
 gameDisplay = pygame.display.set_mode((dis_width,dis_height))
 class Tile:
 
-    def __init__(self,slow_down,finish_line,block_path,checkpoint):
+    def __init__(self,slow_down,finish_line,block_path,checkpoint,extra_slow_down,pseudo_wall):
         self.slow_down = slow_down
         self.finish_line = finish_line
         self.block_path = block_path
         self.checkpoint = checkpoint
+        self.extra_slow_down = extra_slow_down
+        self.pseudo_wall = pseudo_wall
+
+
+def create_map_tag():
+    tag_map = [[ Tile(False,False,False,(False,0),False,False) for x in range(0,map_width)] for y in range(0,map_height)]
+
+
+    for y in range(10,15):
+        for x in range(20,25):
+            tag_map[y][x].extra_slow_down = True
+            tag_map[y+23][x].extra_slow_down = True
+            tag_map[y][x+26].extra_slow_down = True
+            tag_map[y+22][x+25].extra_slow_down = True
+            tag_map[y+12][x-14].extra_slow_down = True
+            if x < 23 and y < 13: 
+                tag_map[22+y-10][35+x-20].pseudo_wall = True
+
+    return tag_map
+
+
 def create_map():
-    mymap = [[ Tile(False,False,False,(False,0)) for x in range(0,map_width)] for y in range(0,map_height)]
+    mymap = [[ Tile(False,False,False,(False,0),False,False) for x in range(0,map_width)] for y in range(0,map_height)]
     #map2 = [[ Tile(False) for x in range(0,map_width)] for y in range(0,map_height)]
+
+
 
 #mymap = [[r*30],[r*30]]
 
@@ -107,12 +131,14 @@ def create_map():
     #bottom left
     mymap[0][59].slow_down = True
     for y in range(3):
-        for i in range(2,15):
-            if i < 12:
-                mymap[i][29+y].finish_line = True
+        for i in range(2,16):
+            mymap[i-2][29+y].finish_line = True
+            if i < 14:
+                mymap[i-2][29+y].finish_line = True
                 mymap[i+31][29+y].checkpoint = (True,2)
-            mymap[22+y][i].checkpoint = (True,3)
-            mymap[22+y][i+43].checkpoint = (True,1)
+            mymap[22+y][i+44].checkpoint = (True,1)
+            mymap[22+y][i-2].checkpoint = (True,3)
+            
         mymap[22+y][45].checkpoint = (False,1)
 
     #top right
@@ -133,6 +159,11 @@ def draw_map(m):
                 gameDisplay.blit(finish, (x*cell_width, y* cell_height))
             if m[y][x].checkpoint[0]:
                 gameDisplay.blit(check, (x*cell_width, y* cell_height))
+
+            if m[y][x].extra_slow_down:
+                gameDisplay.blit(grass, (x*cell_width, y* cell_height))
+            if m[y][x].pseudo_wall:
+                gameDisplay.blit(pseudo, (x*cell_width, y* cell_height))
 
 
                 
@@ -170,8 +201,9 @@ def main():
         pygame.display.update()
         clock.tick(60)
         #gameDisplay.fill(blue)
-        mymap = create_map()
-        draw_map(mymap)
+        #mymap = create_map()
+        tag = create_map_tag()
+        draw_map(tag)
         #bass(400,200)
 
     pygame.quit()

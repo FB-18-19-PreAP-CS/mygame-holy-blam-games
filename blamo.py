@@ -173,8 +173,8 @@ def bumper_cars():
                 if event.type == pygame.QUIT:
                         done = True
         
-        my_map = create_map()
-        setBackgroundImage( 'background.png' )
+        my_map = create_map_tag()
+        setBackgroundImage( 'tag_map.png' )
         showLabel(tagged)
         
         
@@ -259,10 +259,15 @@ def bumper_cars():
             speed =40
         if speed_2 > 40:
             speed_2 = 40
-        if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
-            speed-=1 
-        if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
-            speed_2-=1
+        if my_map[int(y//20)][int(x//20)].extra_slow_down and speed > 5:
+            speed-=4
+        if my_map[int(p//20)][int(o//20)].extra_slow_down and speed_2 > 5:
+            speed_2-=4
+        if my_map[int(y//20)][int(x//20)].psuedo_wall and speed > 5:
+            speed=1
+        if my_map[int(p//20)][int(o//20)].psuedo_wall and speed_2 > 5:
+            speed_2=1
+    
       
 
 
