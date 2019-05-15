@@ -59,6 +59,13 @@ def cars():
         if pressed[pygame.K_RIGHT]: 
             angle+= 7
             transformSprite(viper, angle+90, .3)
+        if pressed[pygame.K_q]:
+            hideLabel(black_laps)
+            hideLabel(orange_laps)
+            killSprite(viper)
+            killSprite(popo)
+            break
+
         if x > 1200:
             x = 1100
             speed-=10
@@ -188,6 +195,11 @@ def bumper_cars():
         if pressed[pygame.K_DOWN]:
             y -=speed* math.sin(angle*math.pi/180)
             x -=speed* math.cos(angle*math.pi/180)
+        if pressed[pygame.K_q]:
+            killSprite(viper)
+            killSprite(popo)
+            hideLabel(tagged)
+            break
         if pressed[pygame.K_LEFT]: 
             angle += -7
             transformSprite(viper, angle+90, .3)
@@ -263,33 +275,32 @@ def bumper_cars():
             speed-=4
         if my_map[int(p//20)][int(o//20)].extra_slow_down and speed_2 > 5:
             speed_2-=4
-        if my_map[int(y//20)][int(x//20)].psuedo_wall and speed > 5:
+        if my_map[int(y//20)][int(x//20)].pseudo_wall and speed > 5:
             speed=1
-        if my_map[int(p//20)][int(o//20)].psuedo_wall and speed_2 > 5:
+        if my_map[int(p//20)][int(o//20)].pseudo_wall and speed_2 > 5:
             speed_2=1
     
       
 
 
 def main():
-    welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 500, 100, fontColour='white', font='Gugi', background='Black')
-    decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 500, 200, fontColour='white', font='Gugi', background='Black')
-    goodbye_label =makeLabel(f'Shutting down', 50, 500, 200, fontColour='white', font='Gugi', background='Black')
+    welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 350, 100, fontColour='red', font='Gugi', background='clear')
+    decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 500, 200, fontColour='red', font='Gugi', background='clear')
+    goodbye_label =makeLabel(f'Shutting down', 50, 350, 200, fontColour='red', font='Gugi', background='clear')
+    
     while True:
-        game_select = pygame.key.get_pressed()
-        screenSize(1200,900)
         showLabel(welcome_label)
         showLabel(decide_label)
-        setBackgroundImage( 'background.png' )
-        if game_select[pygame.K_a]:
+        setBackgroundImage( 'start_screen.png' )
+        if keyPressed("a"):
             hideLabel(welcome_label)
             hideLabel(decide_label)
             cars()
-        if game_select[pygame.K_b]:
+        if keyPressed("b"):
             hideLabel(welcome_label)
             hideLabel(decide_label)
             bumper_cars()
-        if game_select[pygame.K_q]:
+        if keyPressed("q"):
             showLabel(goodbye_label)
             hideLabel(welcome_label)
             hideLabel(decide_label)
@@ -311,4 +322,5 @@ def main():
 # (if you import this as a module then nothing is executed)
 if __name__=="__main__" :
     # call the main function
+    screenSize(1200,900)
     main()
