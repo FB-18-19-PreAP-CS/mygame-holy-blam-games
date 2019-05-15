@@ -2,6 +2,7 @@
 import math
 from pygame_functions import *
 from tutorial import *
+import time
 
 
 # define a main function
@@ -193,8 +194,8 @@ def bumper_cars():
         if pressed[pygame.K_RIGHT]: 
             angle+= 7
             transformSprite(viper, angle+90, .3)
-        if x > 1200:
-            x = 1100
+        if x > 1100:
+            x = 1050
             speed-=10
         if x < 0:
             x = 20
@@ -266,14 +267,43 @@ def bumper_cars():
 
 
 def main():
-    screenSize(1200,900)
-    bumper_cars()
+    welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 500, 100, fontColour='white', font='Gugi', background='Black')
+    decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 500, 200, fontColour='white', font='Gugi', background='Black')
+    goodbye_label =makeLabel(f'Shutting down', 50, 500, 200, fontColour='white', font='Gugi', background='Black')
+    while True:
+        game_select = pygame.key.get_pressed()
+        screenSize(1200,900)
+        showLabel(welcome_label)
+        showLabel(decide_label)
+        setBackgroundImage( 'background.png' )
+        if game_select[pygame.K_a]:
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            cars()
+        if game_select[pygame.K_b]:
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            bumper_cars()
+        if game_select[pygame.K_q]:
+            showLabel(goodbye_label)
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            time.sleep(1)
+            break
+
+
+
+    
+        
+
+    
+    # bumper_cars()
    
 
         
      
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
-if __name__=="__main__":
+if __name__=="__main__" :
     # call the main function
     main()
