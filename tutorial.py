@@ -1,6 +1,13 @@
 import pygame
 from pygame_functions import *
 #import Pygame_Functions-master
+#Tutorials Used:
+# Pygame top down racing game - start of tutorial to get started - https://www.youtube.com/playlist?list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO
+#Rogue like tutorial (mostly Part 4) - https://www.youtube.com/watch?v=6XfQqFvJtts&list=PLKUel_nHsTQ1yX7tQxR_SQRdcOFyXfNAb
+#
+#sources
+#
+#
 pygame.init()
 map_width = 60
 map_height = 45
