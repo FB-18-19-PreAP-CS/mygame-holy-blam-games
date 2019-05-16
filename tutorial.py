@@ -8,6 +8,7 @@ from pygame_functions import *
 #sources
 #
 #
+
 pygame.init()
 map_width = 60
 map_height = 45
