@@ -2,6 +2,7 @@
 import math
 from pygame_functions import *
 from tutorial import *
+import time
 
 
 # define a main function
@@ -19,19 +20,29 @@ def cars():
     p = 30
     speed = 2
     speed_2 = 2
+    lap_count= 0
+    lap_count_2=0
     clock = pygame.time.Clock()
     viper = makeSprite('Black_viper.png')
-    transformSprite(viper,90, .1)
+    transformSprite(viper,90, .3)
     popo = makeSprite('cool_car.png')
-    transformSprite(popo,90, .1)
+    transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
+    black_laps = makeLabel(f'Black car Lap {lap_count}', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
+    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 18, 300, 100, fontColour='white', font='Gugi', background='Black')
     while not done:
         for event in pygame.event.get():
+
                 if event.type == pygame.QUIT:
                         done = True
+        
         my_map = create_map()
-        # draw_map(my_map)
+        setBackgroundImage( 'background.png' )
+        showLabel(black_laps)
+        showLabel(orange_laps)
+        changeLabel(black_laps, f'Black car Lap {lap_count}', fontColour='white', background='Black')
+        changeLabel(orange_laps, f'Orange car Lap {lap_count_2}', fontColour='white', background='Black')
         showSprite(viper)
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_m]: speed-=.25
@@ -44,10 +55,16 @@ def cars():
             x -=speed* math.cos(angle*math.pi/180)
         if pressed[pygame.K_LEFT]: 
             angle += -7
-            transformSprite(viper, angle+90, .1)
+            transformSprite(viper, angle+90, .3)
         if pressed[pygame.K_RIGHT]: 
             angle+= 7
-            transformSprite(viper, angle+90, .1)
+            transformSprite(viper, angle+90, .3)
+        if pressed[pygame.K_q]:
+            hideLabel(black_laps)
+            hideLabel(orange_laps)
+            killSprite(viper)
+            killSprite(popo)
+            break
 
         if x > 1200:
             x = 1100
@@ -70,14 +87,14 @@ def cars():
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
         if pressed[pygame.K_s]:
-            o -=speed_2* math.sin(angle_dos*math.pi/180)
-            p -=speed_2* math.cos(angle_dos*math.pi/180)
+            p -=speed_2* math.sin(angle_dos*math.pi/180)
+            o -=speed_2* math.cos(angle_dos*math.pi/180)
         if pressed[pygame.K_a]: 
             angle_dos+= -7
-            transformSprite(popo, angle_dos+90, .1)
+            transformSprite(popo, angle_dos+90, .3)
         if pressed[pygame.K_d]: 
             angle_dos+= 7
-            transformSprite(popo, angle_dos+90, .1)
+            transformSprite(popo, angle_dos+90, .3)
         if o > 1200:
             o = 1100
             speed_2-=10
@@ -100,17 +117,18 @@ def cars():
             p-=10
             speed -= 10
             speed_2-=10
+            # makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background='clear')
         if speed < 0:
             speed = 1 
         if speed_2 < 0:
             speed_2 = 1
-        if speed > 20:
-            speed = 20
-        if speed_2 > 20:
-            speed_2 = 20
-        if my_map[int(y//20)][int(x//20)].slow_down:
+        if speed > 40:
+            speed =40
+        if speed_2 > 40:
+            speed_2 = 40
+        if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
             speed-=1 
-        if my_map[int(p//20)][int(o//20)].slow_down:
+        if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
             speed_2-=1
         if my_map[int(y//20)][int(x//20)].checkpoint[0] == True and my_map[int(y//20)][int(x//20)].checkpoint[1] == 1:
             car_passed_check_1 = True
@@ -163,7 +181,7 @@ def bumper_cars():
                         done = True
         
         my_map = create_map_tag()
-        setBackgroundImage( 'background.png' )
+        setBackgroundImage( 'tag_map.png' )
         showLabel(tagged)
         
         
@@ -177,14 +195,19 @@ def bumper_cars():
         if pressed[pygame.K_DOWN]:
             y -=speed* math.sin(angle*math.pi/180)
             x -=speed* math.cos(angle*math.pi/180)
+        if pressed[pygame.K_q]:
+            killSprite(viper)
+            killSprite(popo)
+            hideLabel(tagged)
+            break
         if pressed[pygame.K_LEFT]: 
             angle += -7
             transformSprite(viper, angle+90, .3)
         if pressed[pygame.K_RIGHT]: 
             angle+= 7
             transformSprite(viper, angle+90, .3)
-        if x > 1200:
-            x = 1100
+        if x > 1100:
+            x = 1050
             speed-=10
         if x < 0:
             x = 20
@@ -248,21 +271,56 @@ def bumper_cars():
             speed =40
         if speed_2 > 40:
             speed_2 = 40
-        if my_map[int(y//20)][int(x//20)].slow_down and speed > 5:
-            speed-=1 
-        if my_map[int(p//20)][int(o//20)].slow_down and speed_2 > 5:
-            speed_2-=1
+        if my_map[int(y//20)][int(x//20)].extra_slow_down and speed > 5:
+            speed-=4
+        if my_map[int(p//20)][int(o//20)].extra_slow_down and speed_2 > 5:
+            speed_2-=4
+        if my_map[int(y//20)][int(x//20)].pseudo_wall and speed > 5:
+            speed=1
+        if my_map[int(p//20)][int(o//20)].pseudo_wall and speed_2 > 5:
+            speed_2=1
+    
       
 
 
 def main():
-    screenSize(1200,900)
-    bumper_cars()
+    welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 350, 100, fontColour='red', font='Gugi', background='clear')
+    decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 500, 200, fontColour='red', font='Gugi', background='clear')
+    goodbye_label =makeLabel(f'Shutting down', 50, 350, 200, fontColour='red', font='Gugi', background='clear')
+    
+    while True:
+        showLabel(welcome_label)
+        showLabel(decide_label)
+        setBackgroundImage( 'start_screen.png' )
+        if keyPressed("a"):
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            cars()
+        if keyPressed("b"):
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            bumper_cars()
+        if keyPressed("q"):
+            showLabel(goodbye_label)
+            hideLabel(welcome_label)
+            hideLabel(decide_label)
+            time.sleep(1)
+            break
+
+
+
+    
+        
+
+    
+    # bumper_cars()
    
 
         
      
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
-if __name__=="__main__":
+if __name__=="__main__" :
+    # call the main function
+    screenSize(1200,900)
     main()
