@@ -29,10 +29,17 @@ def cars():
     transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
+<<<<<<< HEAD
     black_laps = makeLabel(f'Black car Lap {lap_count}', 28, 100, 100, fontColour='white', font='Gugi', background='clear')
     orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 28, 300, 100, fontColour='white', font='Gugi', background='clear')
     contine_label =  makeLabel(f'Orange car wins! play again(p) or (q)uit?', 30, 300, 100, fontColour='red', font='Gugi', background='clear')
     contine_label_2 =  makeLabel(f'Black car Lap wins! Play again(p) or (q)uit?', 30, 450, 100, fontColour='red', font='Gugi', background='clear')
+=======
+    black_laps = makeLabel(f'Black car Lap {lap_count}', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
+    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 18, 300, 100, fontColour='white', font='Gugi', background='Black')
+    crash = makeSound('car crash.ogg')
+    accelerate = makeSound('racecar_sound.ogg')
+>>>>>>> 056b45fa4767e12bab487ffa73091de6d6a8b902
     while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -48,6 +55,7 @@ def cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
+            playSound(accelerate)
             speed+=.5
             x +=speed* math.cos(angle*math.pi/180)
             y += speed* math.sin(angle*math.pi/180)
@@ -84,6 +92,7 @@ def cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_r]: speed_2-=.25
         if pressed[pygame.K_w]:
+            playSound(accelerate)
             speed_2+=.5
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
@@ -112,6 +121,7 @@ def cars():
         angle_dos = angle_dos%360
         angle = angle%360
         if touching(viper,popo):
+            playSound(crash)
             x+=10
             y+=10
             o-=10
@@ -200,7 +210,13 @@ def bumper_cars():
     transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
+<<<<<<< HEAD
     tagged = makeLabel(f'Black car Tagged!', 40, 100, 100, fontColour='white', font='Gugi', background='clear')
+=======
+    tagged = makeLabel(f'Black car Tagged!', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
+    crash = makeSound('car crash.ogg')
+    accelerate = makeSound('racecar_sound.ogg')
+>>>>>>> 056b45fa4767e12bab487ffa73091de6d6a8b902
     while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -215,6 +231,7 @@ def bumper_cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
+            playSound(accelerate)
             speed+=.5
             x +=speed* math.cos(angle*math.pi/180)
             y += speed* math.sin(angle*math.pi/180)
@@ -249,6 +266,7 @@ def bumper_cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_r]: speed_2-=.25
         if pressed[pygame.K_w]:
+            playSound(accelerate)
             speed_2+=.5
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
@@ -277,6 +295,7 @@ def bumper_cars():
         angle_dos = angle_dos%360
         angle = angle%360
         if touching(viper,popo):
+            playSound(crash)
             x+=10
             y+=10
             o-=10
@@ -314,7 +333,7 @@ def main():
     while True:
         showLabel(welcome_label)
         showLabel(decide_label)
-        setBackgroundImage( 'start_screen.png' )
+        # setBackgroundImage( 'start_screen.png' )
         if keyPressed("a"):
             hideLabel(welcome_label)
             hideLabel(decide_label)

@@ -1,6 +1,14 @@
 import pygame
 from pygame_functions import *
 #import Pygame_Functions-master
+#Tutorials Used:
+# Pygame top down racing game - start of tutorial to get started - https://www.youtube.com/playlist?list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO
+#Rogue like tutorial (mostly Part 4) - https://www.youtube.com/watch?v=6XfQqFvJtts&list=PLKUel_nHsTQ1yX7tQxR_SQRdcOFyXfNAb
+#
+#sources
+#https://qq.readthedocs.io/en/latest/ tile guide
+#
+
 pygame.init()
 map_width = 60
 map_height = 45
@@ -144,6 +152,27 @@ def create_map():
     #top right
     return mymap
 #surface main^
+def draw_map_tag(m):
+    for x in range(map_width):
+        for y in range(map_height):
+            if m[x][y].slow_down == False:
+                #draw road
+                gameDisplay.blit(road, (x*cell_width, y* cell_height))
+            if m[x][y].slow_down:
+                #draw grass
+                gameDisplay.blit(grass, (x*cell_width, y* cell_height))
+
+            if m[x][y].finish_line:
+                #draw finish line
+                gameDisplay.blit(finish, (x*cell_width, y* cell_height))
+            if m[x][y].checkpoint[0]:
+                gameDisplay.blit(check, (x*cell_width, y* cell_height))
+
+            if m[x][y].extra_slow_down:
+                gameDisplay.blit(grass, (x*cell_width, y* cell_height))
+            if m[x][y].pseudo_wall:
+                gameDisplay.blit(pseudo, (x*cell_width, y* cell_height))
+
 def draw_map(m):
     for x in range(map_width):
         for y in range(map_height):
