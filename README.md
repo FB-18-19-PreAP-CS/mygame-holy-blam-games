@@ -11,13 +11,13 @@ The game is set in a different place depending on the game mode you choose.
   * The game only ends when you choose to end it. 
 User Inputs:
  * Car One (Black Car):
-  * Arrow key up - Forward
-  * Arrow key down - Reverse
-  * Arrow key left - turn left
-  * Arrow key right - turn right
+   * Arrow key up - Forward
+   * Arrow key down - Reverse
+   * Arrow key left - turn left
+   * Arrow key right - turn right
  * Car Two (Orange Car):
-  * W key - Forward
-  * S key - Forward
-  * A key - turn left
-  * D key - turn right
+   * W key - Forward
+   * S key - Forward
+   * A key - turn left
+   * D key - turn right
   
