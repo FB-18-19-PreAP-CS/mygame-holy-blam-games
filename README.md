@@ -5,6 +5,11 @@ The game is set in a different place depending on the game mode you choose.
   * The cars start on the straight, at the finish line.
   * You go around the track, staying on the asphalt as much as possible.(There are invisible checkpoints to prevent from making a short lap.)
   * Whichever player makes 7 laps first wins, and it asks if you want to play again.
+  
+  
+  ![alt text](https://github.com/FB-18-19-PreAP-CS/mygame-holy-blam-games/blob/master/background.png)
+  
+  
 * If you choose the bumper cars mode you start on a square area with slowdown squares:
   * The point is to try and avoid the other car.
   * whichever car is the one that is "it" at the time is shown in a text box.
