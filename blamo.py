@@ -14,10 +14,10 @@ def cars():
     car2_passed_check_2 = False
     car2_passed_check_3 = False
     done = False
-    x = 20
-    y= 20
-    o = 30
-    p = 30
+    x = 500
+    y= 40
+    o = 500
+    p = 80
     speed = 2
     speed_2 = 2
     lap_count= 0
@@ -29,10 +29,10 @@ def cars():
     transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
-    black_laps = makeLabel(f'Black car Lap {lap_count}', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
-    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 18, 300, 100, fontColour='white', font='Gugi', background='Black')
-    crash = makeSound('car crash.ogg')
-    accelerate = makeSound('racecar_sound.ogg')
+    black_laps = makeLabel(f'Black car Lap {lap_count}', 28, 100, 100, fontColour='white', font='Gugi', background='clear')
+    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 28, 300, 100, fontColour='white', font='Gugi', background='clear')
+    contine_label =  makeLabel(f'Orange car wins! play again(p) or (q)uit?', 30, 300, 100, fontColour='red', font='Gugi', background='clear')
+    contine_label_2 =  makeLabel(f'Black car Lap wins! Play again(p) or (q)uit?', 30, 450, 100, fontColour='red', font='Gugi', background='clear')
     while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -48,7 +48,6 @@ def cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
-            playSound(accelerate)
             speed+=.5
             x +=speed* math.cos(angle*math.pi/180)
             y += speed* math.sin(angle*math.pi/180)
@@ -85,7 +84,6 @@ def cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_r]: speed_2-=.25
         if pressed[pygame.K_w]:
-            playSound(accelerate)
             speed_2+=.5
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
@@ -114,7 +112,6 @@ def cars():
         angle_dos = angle_dos%360
         angle = angle%360
         if touching(viper,popo):
-            playSound(crash)
             x+=10
             y+=10
             o-=10
@@ -218,7 +215,6 @@ def bumper_cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_m]: speed-=.25
         if pressed[pygame.K_UP]:
-            playSound(accelerate)
             speed+=.5
             x +=speed* math.cos(angle*math.pi/180)
             y += speed* math.sin(angle*math.pi/180)
@@ -253,7 +249,6 @@ def bumper_cars():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_r]: speed_2-=.25
         if pressed[pygame.K_w]:
-            playSound(accelerate)
             speed_2+=.5
             o +=speed_2* math.cos(angle_dos*math.pi/180)
             p += speed_2* math.sin(angle_dos*math.pi/180)
@@ -282,7 +277,6 @@ def bumper_cars():
         angle_dos = angle_dos%360
         angle = angle%360
         if touching(viper,popo):
-            playSound(crash)
             x+=10
             y+=10
             o-=10
@@ -290,9 +284,9 @@ def bumper_cars():
             speed -= 10
             speed_2-=10
             if tag_count % 2 == 0:
-                changeLabel(tagged,'Orange Car tagged', fontColour='white', background='Black')
+                changeLabel(tagged, f'Orange Car tagged', fontColour='white', background='Black')
             else:
-                changeLabel(tagged,'Black Car tagged', fontColour='white', background='Black')
+                changeLabel(tagged, f'Black Car tagged', fontColour='white', background='Black')
             tag_count+=1
             # makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background='clear')
         if speed < 0:
@@ -303,20 +297,12 @@ def bumper_cars():
             speed =40
         if speed_2 > 40:
             speed_2 = 40
-        if my_map[int(y//20)][int(x//20)].extra_slow_down and speed > 5:
-            speed-=4
-        if my_map[int(p//20)][int(o//20)].extra_slow_down and speed_2 > 5:
-            speed_2-=4
-        if my_map[int(y//20)][int(x//20)].pseudo_wall and speed > 5:
-            speed=1
-        if my_map[int(p//20)][int(o//20)].pseudo_wall and speed_2 > 5:
-            speed_2=1
 
 def main():
     welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 5, 5, fontColour='red', font='Gugi', background='clear')
     decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 50, 50, fontColour='red', font='Gugi', background='clear')
     goodbye_label =makeLabel(f'Shutting down', 60, 5, 5, fontColour='red', font='Gugi', background='clear')
-    setBackgroundImage( 'start_screen.png' )
+    
     while True:
         showLabel(welcome_label)
         showLabel(decide_label)
@@ -340,4 +326,5 @@ def main():
 if __name__=="__main__" :
     # call the main function
     screenSize(1200,900)
+    setBackgroundImage('background.png')
     main()
