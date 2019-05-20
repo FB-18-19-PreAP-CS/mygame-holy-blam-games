@@ -14,6 +14,11 @@ The game is set in a different place depending on the game mode you choose.
   * The point is to try and avoid the other car.
   * whichever car is the one that is "it" at the time is shown in a text box.
   * The game only ends when you choose to end it. 
+  
+  
+  ![alt text](https://github.com/FB-18-19-PreAP-CS/mygame-holy-blam-games/blob/master/tag_map.png)
+  
+  
 User Inputs:
  * Car One (Black Car):
    * Arrow key up - Forward
