@@ -29,17 +29,10 @@ def cars():
     transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
-<<<<<<< HEAD
-    black_laps = makeLabel(f'Black car Lap {lap_count}', 28, 100, 100, fontColour='white', font='Gugi', background='clear')
-    orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 28, 300, 100, fontColour='white', font='Gugi', background='clear')
-    contine_label =  makeLabel(f'Orange car wins! play again(p) or (q)uit?', 30, 300, 100, fontColour='red', font='Gugi', background='clear')
-    contine_label_2 =  makeLabel(f'Black car Lap wins! Play again(p) or (q)uit?', 30, 450, 100, fontColour='red', font='Gugi', background='clear')
-=======
     black_laps = makeLabel(f'Black car Lap {lap_count}', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
     orange_laps = makeLabel(f'Orange car Lap {lap_count_2}', 18, 300, 100, fontColour='white', font='Gugi', background='Black')
     crash = makeSound('car crash.ogg')
     accelerate = makeSound('racecar_sound.ogg')
->>>>>>> 056b45fa4767e12bab487ffa73091de6d6a8b902
     while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -210,13 +203,7 @@ def bumper_cars():
     transformSprite(popo,90, .3)
     angle = 0
     angle_dos = 0
-<<<<<<< HEAD
     tagged = makeLabel(f'Black car Tagged!', 40, 100, 100, fontColour='white', font='Gugi', background='clear')
-=======
-    tagged = makeLabel(f'Black car Tagged!', 18, 100, 100, fontColour='white', font='Gugi', background='Black')
-    crash = makeSound('car crash.ogg')
-    accelerate = makeSound('racecar_sound.ogg')
->>>>>>> 056b45fa4767e12bab487ffa73091de6d6a8b902
     while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -329,11 +316,11 @@ def main():
     welcome_label = makeLabel(f'Hello Welcome to BLAMO!', 30, 5, 5, fontColour='red', font='Gugi', background='clear')
     decide_label = makeLabel(f'Press "a" for Racing, "b" for Bumper cars, or "q" to Quit', 30, 50, 50, fontColour='red', font='Gugi', background='clear')
     goodbye_label =makeLabel(f'Shutting down', 60, 5, 5, fontColour='red', font='Gugi', background='clear')
-    
+    setBackgroundImage( 'start_screen.png' )
     while True:
         showLabel(welcome_label)
         showLabel(decide_label)
-        # setBackgroundImage( 'start_screen.png' )
+        
         if keyPressed("a"):
             hideLabel(welcome_label)
             hideLabel(decide_label)
